@@ -17,7 +17,7 @@ const Header = props => {
                 <i className="fas fa-home" /> Home
               </Link>
             </li>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <Link to="/contact/add" className="nav-link">
                 <i className="fas fa-plus" /> Add
               </Link>
@@ -26,7 +26,7 @@ const Header = props => {
               <Link to="/about" className="nav-link">
                 <i className="fas fa-question" /> About
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
@@ -35,7 +35,7 @@ const Header = props => {
 };
 
 Header.defaultProps = {
-  branding: 'My App'
+  branding: 'Pokedex'
 };
 
 Header.propTypes = {

@@ -4,7 +4,7 @@ import Pokemons from "./components/pokemons/Pokemons";
 
 // import AddContact from "./components/contacts/AddContact";
 // import EditContact from "./components/contacts/EditContact";
-// import Header from "./components/layout/Header";
+import Header from "./components/layout/Header";
 // import About from "./components/pages/About";
 // import NotFound from "./components/pages/NotFound";
 
@@ -20,7 +20,7 @@ class App extends Component {
             <Provider store={store}>
                 <Router>
                     <div className="App">
-                        {/* <Header branding="Contact Manager" /> */}
+                        <Header branding="Pokedex" />
                         <div className="container">
                             <Switch>
                                 <Route exact path="/" component={Pokemons} />

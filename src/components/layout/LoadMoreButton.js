@@ -3,12 +3,18 @@ import { connect } from "react-redux";
 import { loadMore } from "../../actions/pokemonActions";
 
 class LoadMoreButton extends Component {
-    loadMoreClickHandler = offset => {
-        this.props.loadMore(offset);
+
+    state={
+        offsetVal:20
+    }
+
+    loadMoreClickHandler = () => {
+        this.setState({offsetVal:this.state.offsetVal+20});
+        this.props.loadMore(this.state.offsetVal);
     };
 
     render() {
-        const offsetVal = 20;
+        const {offsetVal} = this.state;
         return (
             <button
                 className="btn btn-primary"

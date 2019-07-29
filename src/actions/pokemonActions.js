@@ -1,5 +1,7 @@
 import {
     GET_POKEMONS,
+    GET_POKEMONS_FAIL,
+    GET_POKEMONS_SUCCESS,
     LOAD_MORE
     // ADD_CONTACT,
     // GET_CONTACT,
@@ -8,11 +10,28 @@ import {
 import axios from "axios";
 
 export const getPokemons = () => async dispatch => {
+    dispatch({type: GET_POKEMONS});
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20`);
-    console.log(res.data);
+
+    if(res){
+        dispatch(getPokemonsSuccess(res.data.results));
+    }
+    else{
+        dispatch(getPokemonsFail());
+    }
+};
+
+export const getPokemonsSuccess = (pokemons) => dispatch => {
     dispatch({
-        type: GET_POKEMONS,
-        payload: res.data.results
+        type: GET_POKEMONS_SUCCESS,
+        payload: pokemons
+    });
+};
+
+export const getPokemonsFail = () => dispatch => {
+    dispatch({
+        type: GET_POKEMONS_FAIL,
+        payload: 'Something went wrong'
     });
 };
 
@@ -20,7 +39,6 @@ export const loadMore = offset => async dispatch => {
     const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=20`
     );
-    console.log(res);
     dispatch({
         type: LOAD_MORE,
         payload: res.data.results

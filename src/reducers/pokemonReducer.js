@@ -1,7 +1,9 @@
-import { GET_POKEMONS, LOAD_MORE } from "../actions/types";
+import { GET_POKEMONS, LOAD_MORE, GET_POKEMONS_SUCCESS, GET_POKEMONS_FAIL } from "../actions/types";
 
 const initialState = {
-    pokemons: []
+    pokemons: [],
+    isFetching:false,
+    error:null
 };
 
 export default function(state = initialState, action) {
@@ -9,13 +11,33 @@ export default function(state = initialState, action) {
         case GET_POKEMONS: {
             return {
                 ...state,
-                pokemons: action.payload
+                isFetching:true
             };
         }
+
+        case  GET_POKEMONS_SUCCESS:{
+            return {
+                ...state,
+                pokemons: [...state.pokemons, ...action.payload],
+                isFetching:false,
+                error:null
+            };
+        }
+
+        case  GET_POKEMONS_FAIL:{
+            return {
+                ...state,
+                isFetching:false,
+                error: action.payload
+            };
+        }
+
         case LOAD_MORE: {
             return {
                 ...state,
-                pokemons: [action.payload, ...state.pokemons]
+                pokemons: [...state.pokemons, ...action.payload],
+                isFetching:false,
+                error: null
             };
         }
         // case GET_CONTACT: {
