@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { getPokemonByName } from "../../actions/pokemonActions";
 
 class Pokemon extends Component {
     // state = {
     //     showContactInfo: false
     // };
 
-    // onDeleteClick = id => {
-    //     this.props.deleteContact(id);
-    // };
+    onClickHandler = name => {
+        console.log(name);
+        this.props.getPokemonByName(name);
+    };
 
     render() {
         const { name } = this.props.pokemon;
@@ -18,8 +20,21 @@ class Pokemon extends Component {
 
         return (
             <div className="card card-body mb-3">
-                <h4>
+                <h4
+                // onClick={this.onClickHandler.bind(this, name)}
+                >
                     {name}
+                    <Link to={`pokemons/details/${name}`}>
+                        <i
+                            className="fas fa-external-link-alt"
+                            style={{
+                                cursor: "pointer",
+                                float: "right",
+                                color: "black",
+                                marginRight: "1rem"
+                            }}
+                        />
+                    </Link>
                     {/* <i
                         onClick={() =>
                             this.setState({
@@ -62,11 +77,11 @@ class Pokemon extends Component {
 }
 
 Pokemon.propTypes = {
-    pokemon: PropTypes.object.isRequired
-    //deleteContact: PropTypes.func.isRequired
+    pokemon: PropTypes.object.isRequired,
+    getPokemonByName: PropTypes.func.isRequired
 };
 
 export default connect(
-    null
-    // { deleteContact }
+    null,
+    { getPokemonByName }
 )(Pokemon);

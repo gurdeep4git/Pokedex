@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+import Login from "./components/auth/login";
+
 import Pokemons from "./components/pokemons/Pokemons";
+import PokemonDetails from "./components/pokemons/PokemonDetails";
 
 // import AddContact from "./components/contacts/AddContact";
 // import EditContact from "./components/contacts/EditContact";
@@ -23,7 +27,17 @@ class App extends Component {
                         <Header branding="Pokedex" />
                         <div className="container">
                             <Switch>
-                                <Route exact path="/" component={Pokemons} />
+                                <Route exact path="/" component={Login} />
+                                <Route
+                                    exact
+                                    path="/pokemons"
+                                    component={Pokemons}
+                                />
+                                <Route
+                                    exact
+                                    path="/pokemons/details/:name"
+                                    component={PokemonDetails}
+                                />
                                 {/* <Route
                                     exact
                                     path="/contact/add"

@@ -2,7 +2,8 @@ import {
     GET_POKEMONS,
     GET_POKEMONS_FAIL,
     GET_POKEMONS_SUCCESS,
-    LOAD_MORE
+    LOAD_MORE,
+    GET_POKEMON_BY_NAME
     // ADD_CONTACT,
     // GET_CONTACT,
     // UPDATE_CONTACT
@@ -10,18 +11,17 @@ import {
 import axios from "axios";
 
 export const getPokemons = () => async dispatch => {
-    dispatch({type: GET_POKEMONS});
+    dispatch({ type: GET_POKEMONS });
     const res = await axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=20`);
 
-    if(res){
+    if (res) {
         dispatch(getPokemonsSuccess(res.data.results));
-    }
-    else{
+    } else {
         dispatch(getPokemonsFail());
     }
 };
 
-export const getPokemonsSuccess = (pokemons) => dispatch => {
+export const getPokemonsSuccess = pokemons => dispatch => {
     dispatch({
         type: GET_POKEMONS_SUCCESS,
         payload: pokemons
@@ -31,7 +31,7 @@ export const getPokemonsSuccess = (pokemons) => dispatch => {
 export const getPokemonsFail = () => dispatch => {
     dispatch({
         type: GET_POKEMONS_FAIL,
-        payload: 'Something went wrong'
+        payload: "Something went wrong"
     });
 };
 
@@ -42,6 +42,18 @@ export const loadMore = offset => async dispatch => {
     dispatch({
         type: LOAD_MORE,
         payload: res.data.results
+    });
+};
+
+export const getPokemonByName = name => async dispatch => {
+    const pokemon = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${name}`
+    );
+    debugger;
+    console.log(pokemon.data);
+    dispatch({
+        type: GET_POKEMON_BY_NAME,
+        payload: pokemon.data
     });
 };
 

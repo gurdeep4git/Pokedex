@@ -1,9 +1,16 @@
-import { GET_POKEMONS, LOAD_MORE, GET_POKEMONS_SUCCESS, GET_POKEMONS_FAIL } from "../actions/types";
+import {
+    GET_POKEMONS,
+    LOAD_MORE,
+    GET_POKEMONS_SUCCESS,
+    GET_POKEMONS_FAIL,
+    GET_POKEMON_BY_NAME
+} from "../actions/types";
 
 const initialState = {
     pokemons: [],
-    isFetching:false,
-    error:null
+    isFetching: false,
+    error: null,
+    pokemonDataByName: {}
 };
 
 export default function(state = initialState, action) {
@@ -11,23 +18,23 @@ export default function(state = initialState, action) {
         case GET_POKEMONS: {
             return {
                 ...state,
-                isFetching:true
+                isFetching: true
             };
         }
 
-        case  GET_POKEMONS_SUCCESS:{
+        case GET_POKEMONS_SUCCESS: {
             return {
                 ...state,
                 pokemons: [...state.pokemons, ...action.payload],
-                isFetching:false,
-                error:null
+                isFetching: false,
+                error: null
             };
         }
 
-        case  GET_POKEMONS_FAIL:{
+        case GET_POKEMONS_FAIL: {
             return {
                 ...state,
-                isFetching:false,
+                isFetching: false,
                 error: action.payload
             };
         }
@@ -36,8 +43,17 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 pokemons: [...state.pokemons, ...action.payload],
-                isFetching:false,
+                isFetching: false,
                 error: null
+            };
+        }
+
+        case GET_POKEMON_BY_NAME: {
+            return {
+                ...state,
+                isFetching: false,
+                error: null,
+                pokemonDataByName: action.payload
             };
         }
         // case GET_CONTACT: {

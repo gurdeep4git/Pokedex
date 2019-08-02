@@ -4,7 +4,11 @@ import PropTypes from "prop-types";
 
 import Pokemon from "./Pokemon";
 import LoadMoreButton from "../layout/LoadMoreButton";
-import { getPokemons, getPokemonsSuccess, getPokemonsFail } from "../../actions/pokemonActions";
+import {
+    getPokemons,
+    getPokemonsSuccess,
+    getPokemonsFail
+} from "../../actions/pokemonActions";
 
 class Pokemons extends Component {
     componentDidMount() {
@@ -13,7 +17,6 @@ class Pokemons extends Component {
 
     render() {
         const { pokemons, isFetching } = this.props;
-        console.log("complete",this.props.complete);
         return (
             <React.Fragment>
                 <h1 className="display-4 mb-2">
@@ -22,7 +25,7 @@ class Pokemons extends Component {
                 {isFetching ? (
                     <p>Loading...</p>
                 ) : (
-                    pokemons.map((pokemon,i) => (
+                    pokemons.map((pokemon, i) => (
                         <Pokemon key={i} pokemon={pokemon} />
                     ))
                 )}
@@ -34,16 +37,16 @@ class Pokemons extends Component {
 
 Pokemons.propTypes = {
     pokemons: PropTypes.array.isRequired,
-    isFetching:PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
     getPokemons: PropTypes.func.isRequired,
-    getPokemonsSuccess:PropTypes.func.isRequired,
-    getPokemonsFail:PropTypes.func.isRequired
+    getPokemonsSuccess: PropTypes.func.isRequired,
+    getPokemonsFail: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
     pokemons: state.pokemon.pokemons,
-    isFetching:state.pokemon.isFetching,
-    errorMsg:state.pokemon.error
+    isFetching: state.pokemon.isFetching,
+    errorMsg: state.pokemon.error
 });
 
 // const mapDispatchToProps = dispatch => ({

@@ -2,7 +2,7 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_POKEMONS_SUCCESS = "GET_POKEMONS_SUCCESS";
 export const GET_POKEMONS_FAIL = "GET_POKEMONS_FAIL";
 export const LOAD_MORE = "LOAD_MORE";
-
+export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 
 // export const ADD_CONTACT = "ADD_CONTACT";
 // export const GET_CONTACT = "GET_CONTACT";
